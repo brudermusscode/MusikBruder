@@ -1,5 +1,12 @@
 @use "../abstract" as *;
 @use "../framework/var.utils" as *;
+@use "../framework/var.sizes" as *;
+
+html {
+  @media screen and (max-width: $mobile-max-width) {
+    height: 100%;
+  }
+}
 
 body {
   color: $text;
@@ -8,6 +15,14 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
+  overflow: auto;
+
+  @media screen and (max-width: $mobile-max-width) {
+    height: 100%;
+    min-height: initial;
+    max-height: initial;
+    margin: 0;
+  }
 
   &[theme="dark"] {
     background-blur {
@@ -41,7 +56,7 @@ syncing-overlay {
   top: 0;
   left: 0;
   height: 100%;
-  width: 100%;
+  width: 100vw;
   background: $slight-dark;
   backdrop-filter: blur(64px);
   visibility: hidden;
@@ -138,6 +153,13 @@ main {
 
   @media screen and (max-width: $hide-sidebar-max-width) {
     width: calc(100vw - 6 * $main-distance);
+  }
+
+  @media screen and (max-width: $mobile-max-width) {
+    padding-block: $main-distance-smol
+      calc($player-height + 2 * $main-distance-smol);
+    width: calc(100vw - 2 * $main-distance-smol);
+    height: 100%;
   }
 }
 

@@ -68,23 +68,17 @@ $canonical = HOME_URL . ($canonical[0] ?? "");
 
   <ajax-response></ajax-response>
 
-  <syncing-overlay fl aliend jucstart p62 active>
-    <div fl fldircol>
-      <div class="spinner" mb62 ml18>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-
-      <p title text wide bold>Synchronisiere neue Musik</p>
-      <p subtext text regular>Dauert nicht lange.</p>
-    </div>
-  </syncing-overlay>
-
   <?php
+
+  /**
+   * + Mobile player.
+   */
+  // include TEMPLATE . "/global/_player-mobile.php";
+
+  /**
+   * + Synchronization overlay
+   */
+  include TEMPLATE . "/global/_startup-overlay.php";
 
   /**
    * + Music Player

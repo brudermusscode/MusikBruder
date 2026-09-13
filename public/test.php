@@ -1,11 +1,11 @@
-<?php
+<html>
 
-include dirname($_SERVER["DOCUMENT_ROOT"]) . "/vendor/autoload.php";
+<head>
 
-use Bruder\Model\Album;
+</head>
 
-header('Content-Type: application/json');
+<body>
 
-$response = Album::curl_song("The Weeknd", "Blinding Lights");
+</body>
 
-echo $response;
+</html>

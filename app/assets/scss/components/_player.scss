@@ -51,6 +51,68 @@ time-label {
   }
 }
 
+player-contain {
+  display: block;
+  position: fixed;
+  z-index: 101;
+  top: $main-distance;
+  right: calc(2 * $main-distance + (1 * ($main-distance/1.2)));
+
+  @media screen and (max-width: $laptop-max-width) {
+    right: calc($main-distance);
+  }
+
+  @media screen and (max-width: $hide-sidebar-max-width) {
+    right: initial;
+    top: initial;
+    left: 50%;
+    bottom: $main-distance-smol;
+    translate: -50% 0;
+    height: $player-height;
+    width: calc(100vw - 2 * $hide-sidebar-sidebar-width);
+    display: flex;
+    justify-content: center;
+    background: $slighter-light;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding-bottom: 12px;
+    z-index: 97;
+  }
+
+  @media screen and (max-width: $mobile-max-width) {
+    width: calc(100vw - 2 * $main-distance-smol);
+  }
+
+  dot-divider {
+    @media screen and (max-width: $hide-sidebar-max-width) {
+      display: none;
+    }
+  }
+
+  [player-tools] {
+    display: flex;
+    align-items: center;
+    gap: $gap-smol;
+
+    @media screen and (max-width: $hide-sidebar-max-width) {
+      display: none;
+    }
+
+    &:hover {
+      mbutton {
+        margin-left: 0;
+      }
+    }
+
+    mbutton {
+      margin-left: -28px;
+      box-shadow: var(--mio-theme-elevation-1);
+    }
+  }
+}
+
 player {
   display: flex;
   justify-content: center;
@@ -244,6 +306,14 @@ player {
         width: calc(100vw - $main-distance-smol * 4);
       }
 
+      @media screen and (max-width: $hide-sidebar-max-width) {
+        top: initial;
+        bottom: 0;
+        border-radius: 12px 12px 0 0;
+        position: absolute;
+        width: calc(100% - 2 * $main-distance-smol);
+      }
+
       &:hover {
         height: 12px;
       }
@@ -269,10 +339,27 @@ player {
       [next],
       [previous] {
         transition: $trans-cubic;
+        height: $mbutton-std-plus-size;
+        width: $mbutton-std-plus-size;
+        min-width: $mbutton-std-plus-size;
+        padding: 0;
+        font-size: 1.8em;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        @extend .window-light;
+
+        @media screen and (max-width: $hide-sidebar-max-width) {
+          height: $mbutton-std-size;
+          width: $mbutton-std-size;
+          min-width: $mbutton-std-size;
+        }
 
         &:hover {
           background: $slight-light;
-          scale: 1.12;
+          scale: 1.1;
         }
 
         &:active {
@@ -295,6 +382,11 @@ player {
         justify-content: center;
         font-size: 1.8em;
         cursor: pointer;
+
+        @media screen and (max-width: $hide-sidebar-max-width) {
+          width: $mbutton-std-size;
+          height: $mbutton-std-size;
+        }
 
         &::before {
           position: absolute;
@@ -401,6 +493,10 @@ player {
 
 volume-controls {
   position: relative;
+
+  @media screen and (max-width: $hide-sidebar-max-width) {
+    display: none !important;
+  }
 
   &[volume] {
     &[volume="0"],

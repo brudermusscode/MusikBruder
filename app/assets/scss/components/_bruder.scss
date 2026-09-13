@@ -5,6 +5,10 @@
 bruder {
   @extend .window-light;
 
+  @media screen and (max-width: $mobile-max-width) {
+    display: none !important;
+  }
+
   content: "";
   display: block;
   position: fixed;

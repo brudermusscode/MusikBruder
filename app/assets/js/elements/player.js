@@ -786,6 +786,36 @@ export const create_queue = async (
   });
 };
 
+export const set_time = (seconds) => {
+  let track = document.find("player duration-track");
+  let percent_width = (seconds * 100) / __player.Track.audio.duration;
+  let should_resume = __player.active;
+
+  pause();
+
+  // Change visible track width.
+  track.style.width = percent_width + "%";
+
+  // Change actual <audio> time.
+  __player.Track.audio.currentTime = seconds;
+
+  // Save the new time to the localStorage.
+  localStorage.setItem("__player_Track_currentTime", seconds);
+
+  // Waiting 120 ms to not interfere with the css animations.
+  if (should_resume)
+    setTimeout(() => {
+      resume();
+    }, 120);
+};
+
+/**
+ * Tells us if a track has been clicked on and all references are populated.
+ */
+export const track = () => {
+  return __player.Track.id;
+};
+
 document.addEventListener("DOMContentLoaded", async function () {
   /**
    * Set lib view.
@@ -818,29 +848,6 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   sync_files();
 });
-
-export const set_time = (seconds) => {
-  let track = document.find("player duration-track");
-  let percent_width = (seconds * 100) / __player.Track.audio.duration;
-  let should_resume = __player.active;
-
-  pause();
-
-  // Change visible track width.
-  track.style.width = percent_width + "%";
-
-  // Change actual <audio> time.
-  __player.Track.audio.currentTime = seconds;
-
-  // Save the new time to the localStorage.
-  localStorage.setItem("__player_Track_currentTime", seconds);
-
-  // Waiting 120 ms to not interfere with the css animations.
-  if (should_resume)
-    setTimeout(() => {
-      resume();
-    }, 120);
-};
 
 $(function () {
   //
@@ -893,6 +900,8 @@ $(function () {
    * duration-track to indicate, where the song will start playing when clicking.
    */
   $(document).on("mouseover, mousemove", "player-overflow", function (e) {
+    if (!track()) return;
+
     let w = parseFloat(getComputedStyle(this).width);
     let x = e.originalEvent.layerX;
     let label = document.find("time-label");
@@ -919,6 +928,8 @@ $(function () {
    * Set new time for the currently playing track when clicking on the duration-track.
    */
   $(document).on("click", "player-overflow", function (e) {
+    if (!track()) return;
+
     let duration = __player.Track.audio.duration;
     let track_width = parseFloat(getComputedStyle(this).width);
     let layer_clicked_x = e.originalEvent.layerX;

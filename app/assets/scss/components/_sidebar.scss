@@ -8,6 +8,10 @@ sidebar {
   height: auto;
   z-index: 98;
 
+  @media screen and (max-width: $mobile-max-width) {
+    display: none !important;
+  }
+
   &[right],
   &[left] {
     top: $bruder-distance;

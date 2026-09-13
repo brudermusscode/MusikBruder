@@ -80,7 +80,7 @@ include __DIR__ . "/_show_active.php";
     content fl alic jucsb gap=smol+ style=flex:1;>
     <div fl alic <?= $no_left_action ? "gap=smol" : "gap" ?> flone flex-truncate>
       <?php if ($show_count) : ?>
-        <p text smol style=width:40px;rotate:-90deg;margin-left:-10px;margin-right:-11px; text smoler ttup bold tac><?= $count++; ?></p>
+        <p text smol track-count style=width:40px;rotate:-90deg;margin-left:-10px;margin-right:-11px; text smoler ttup bold tac><?= $count++; ?></p>
       <?php endif; ?>
 
       <?php if ($in_playlist): ?>

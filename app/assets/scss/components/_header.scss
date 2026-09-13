@@ -4,6 +4,10 @@
 @use "../abstract" as *;
 
 header {
+  @media screen and (max-width: $mobile-max-width) {
+    display: none !important;
+  }
+
   position: fixed;
   top: 0;
   left: 0;
@@ -31,23 +35,6 @@ logo {
   picture {
     height: 56px;
     width: 56px;
-  }
-}
-
-[player-tools] {
-  display: flex;
-  align-items: center;
-  gap: $gap-smol;
-
-  &:hover {
-    mbutton {
-      margin-left: 0;
-    }
-  }
-
-  mbutton {
-    margin-left: -28px;
-    box-shadow: var(--mio-theme-elevation-1);
   }
 }
 

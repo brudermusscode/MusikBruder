@@ -16,6 +16,12 @@
   }
 }
 
+[hide-above-mobile] {
+  @media screen and (min-width: $mobile-max-width) {
+    display: none !important;
+  }
+}
+
 [elevated] {
   box-shadow: var(--mio-theme-elevation-1);
 
