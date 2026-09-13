@@ -318,7 +318,7 @@ class Track extends Bruder
         $Track->artist = $return_data["info"]["artist"][0] ?? "?*#";
         $Track->title = $return_data["info"]["title"][0] ?? $file_name_wo_extension;
         $Track->genre = $return_data["info"]["genre"][0] ?? null;
-        $Track->year = $return_data["info"]["year"][0] ?? null;
+        $Track->year = $year;
         $Track->mime = $return_data["mime"] ?? null; // will return an error if null!
         $Track->length_seconds = $return_data["length_seconds"];
 
