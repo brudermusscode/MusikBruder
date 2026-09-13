@@ -5,6 +5,7 @@ namespace Bruder\Model;
 use Bruder\Bruder;
 use Bruder\Http\Request;
 use Bruder\Utils\Utils;
+use falahati\PHPMP3\MpegAudio;
 use getID3;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -177,6 +178,7 @@ class Track extends Bruder
          */
         $file_name = explode("/", $path);
         $file_name = array_last($file_name);
+        $file_name_wo_extension = explode(".", $file_name)[0] ?? "no filename";
 
         /**
          * Check if the file exists already.
@@ -291,6 +293,7 @@ class Track extends Bruder
           "length_seconds" => $file_analyzed["playtime_seconds"],
         ];
 
+
         /**
          * All done! We can delete the temporary file and close the
          * original source file.
@@ -304,10 +307,16 @@ class Track extends Bruder
          */
         $Track = new Track;
 
+        // Serialize the year, as it might be not a proper year.
+        $year = $return_data["info"]["year"][0] ?? null;
+        $year = !$year || !ctype_digit($year) ||
+          strlen((string) $year) < 4 || strlen((string) $year) > 4
+          ? null : $year;
+
         # Adding the path as it contains the sub folder.
         $Track->file_name = $path;
-        $Track->artist = $return_data["info"]["artist"][0] ?? null;
-        $Track->title = $return_data["info"]["title"][0] ?? null;
+        $Track->artist = $return_data["info"]["artist"][0] ?? "?*#";
+        $Track->title = $return_data["info"]["title"][0] ?? $file_name_wo_extension;
         $Track->genre = $return_data["info"]["genre"][0] ?? null;
         $Track->year = $return_data["info"]["year"][0] ?? null;
         $Track->mime = $return_data["mime"] ?? null; // will return an error if null!

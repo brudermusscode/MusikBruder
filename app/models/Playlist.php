@@ -12,7 +12,6 @@ class Playlist extends Bruder
   const string ICON = "stacks";
   const string COLOR = "tertiary";
 
-
   /**
    * @var array
    */
